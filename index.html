@@ -26,12 +26,29 @@
   <body>
     <div id="map"></div>
     <script>
-      mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JlZ2Frb2hsZXIiLCJhIjoiY21nMTh2bGs2MGxzejJub3I2eXNvM3Q4ZCJ9.iIfKTi4hKGUiaQWzxjqf6g ';
+      mapboxgl.accessToken = '';
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/gregakohler/cmg13hnuy008n01s87fkw2771',
         center: [-93.2010, 44.9375],
         zoom: 10.7
+      });
+
+      map.on('click', (event) => {
+        const features = map.queryRenderedFeatures(event.point, {
+          layers: ['Museums']
+        });
+        if (!features.length) {
+          return;
+        }
+        const feature = features[0];
+
+        const popup = new mapboxgl.Popup({ offset: [0, -15] })
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(
+            `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+          )
+          .addTo(map);
       });
     </script>
   </body>

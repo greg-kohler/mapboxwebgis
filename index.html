@@ -46,7 +46,9 @@
         const popup = new mapboxgl.Popup({ offset: [0, -15] })
           .setLngLat(feature.geometry.coordinates)
           .setHTML(
-            `<h3>${feature.properties.name}</h3><p>${feature.properties.opening_hours}</p>`
+            `<h3>${feature.properties.name}</h3><p>Hours:${feature.properties.opening_hours}</p>
+            <p>Museum Score: ${feature.properties.MuseumScore}</p>`
+          
           )
           .addTo(map);
       });

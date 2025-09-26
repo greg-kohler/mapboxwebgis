@@ -46,8 +46,26 @@
         const popup = new mapboxgl.Popup({ offset: [0, -15] })
           .setLngLat(feature.geometry.coordinates)
           .setHTML(
-            `<h3>${feature.properties.name}</h3><p>Hours:${feature.properties.opening_hours}</p>
+            `<h3>${feature.properties.name}</h3><p>Hours: ${feature.properties.opening_hours}</p>
             <p>Museum Score: ${feature.properties.MuseumScore}</p>`
+          
+          )
+          .addTo(map);
+      });
+
+      map.on('click', (event) => {
+        const features = map.queryRenderedFeatures(event.point, {
+          layers: ['Thrift Stores']
+        });
+        if (!features.length) {
+          return;
+        }
+        const feature = features[0];
+
+        const popup = new mapboxgl.Popup({ offset: [0, -15] })
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(
+            `<h3>${feature.properties.name}</h3><p>Hours: ${feature.properties.opening_hours}</p>`
           
           )
           .addTo(map);

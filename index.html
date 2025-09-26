@@ -26,10 +26,10 @@
   <body>
     <div id="map"></div>
     <script>
-      mapboxgl.accessToken = 'mapbox://styles/gregakohler/cmg13hnuy008n01s87fkw2771 ';
+      mapboxgl.accessToken = 'mapbox://styles/gregakohler/cmg13hnuy008n01s87fkw2771';
       const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/gregakohler/cmg13hnuy008n01s87fkw2771',
+        style: 'mapbox://styles/gregakohler/cmg13hnuy008n01s87fkw2771 ',
         center: [-93.2010, 44.9375],
         zoom: 10.7
       });
@@ -46,7 +46,7 @@
         const popup = new mapboxgl.Popup({ offset: [0, -15] })
           .setLngLat(feature.geometry.coordinates)
           .setHTML(
-            `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+            `<h3>${feature.properties.name}</h3><p>${feature.properties.description}</p>`
           )
           .addTo(map);
       });

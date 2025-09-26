@@ -26,41 +26,30 @@
   <body>
     <div id="map"></div>
     <script>
-      // The value for 'accessToken' begins with 'pk...'
-      mapboxgl.accessToken = 'pk.eyJ1IjoiZ3JlZ2Frb2hsZXIiLCJhIjoiY21nMTh2bGs2MGxzejJub3I2eXNvM3Q4ZCJ9.iIfKTi4hKGUiaQWzxjqf6g ';
+      mapboxgl.accessToken = '{{MAPBOX_ACCESS_TOKEN}}';
       const map = new mapboxgl.Map({
         container: 'map',
-        // Replace YOUR_STYLE_URL with your style URL.
         style: 'mapbox://styles/gregakohler/cmg13hnuy008n01s87fkw2771',
         center: [-93.2010, 44.9375],
         zoom: 10.7
       });
 
-        // Code from the next step will go here.
-        Add an event listener that runs when a user clicks on the map element.
-       */
-       map.on('click', (event) => {
-         // If the user clicked on one of your markers, get its information.
-         const features = map.queryRenderedFeatures(event.point, {
-           layers: ['Museums'] // replace with your layer name
-         });
-         if (!features.length) {
-           return;
-         }
-         const feature = features[0];
-   
-         // Code from the next step will go here.
-         /*
-      Create a popup, specify its options
-      and properties, and add it to the map.
-    */
-      const popup = new mapboxgl.Popup({ offset: [0, -15] })
-        .setLngLat(feature.geometry.coordinates)
-        .setHTML(
-          `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
-        )
-      .addTo(map);
-     });
+      map.on('click', (event) => {
+        const features = map.queryRenderedFeatures(event.point, {
+          layers: ['chicago-parks']
+        });
+        if (!features.length) {
+          return;
+        }
+        const feature = features[0];
+
+        const popup = new mapboxgl.Popup({ offset: [0, -15] })
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(
+            `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+          )
+          .addTo(map);
+      });
     </script>
   </body>
 </html>

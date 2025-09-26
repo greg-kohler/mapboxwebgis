@@ -36,7 +36,7 @@
 
       map.on('click', (event) => {
         const features = map.queryRenderedFeatures(event.point, {
-          layers: ['chicago-parks']
+          layers: ['Museums']
         });
         if (!features.length) {
           return;
